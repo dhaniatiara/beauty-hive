@@ -4,10 +4,7 @@ class Product(models.Model):
     name = models.CharField(max_length=255)
     price = models.IntegerField()
     desciption = models.TextField()
-    quantity = models.IntegerField()
-    # time = models.DateField(auto_now_add=True)
-    # feelings = models.TextField()
-    # mood_intensity = models.IntegerField()
+    size = models.TextField()
 
     @property
     def is_product_ready(self):
