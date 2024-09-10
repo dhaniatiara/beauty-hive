@@ -1,7 +1,9 @@
 ## Beauty Hive App
 
-Nama: Dhania Tiaraputri Herdiani 
-NPM: 2306165881 
+Nama: Dhania Tiaraputri Herdiani
+
+NPM: 2306165881
+
 Kelas: PBP B
 
 ### 1. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
