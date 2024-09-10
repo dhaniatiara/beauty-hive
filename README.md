@@ -45,9 +45,3 @@ Django merupakan salah satu framework yang terkenal untuk pengembangan perangkat
 5. Mengapa model pada Django disebut sebagai ORM?
 Jawab:
 ORM merupakan singkatan dari Object-relational mapper. ORM membuat kita dapat berinteraksi dengan database seperti saat kita berinteraksi dengan SQL. Model yang kita buat di Django dapat kita modify, delete, menambah, dan query objects. ORM akan digunakan untuk berinteraksi dengan database dan sebagai jembatan antara database dan kode yang kita bikin. ORM membuat sebuah object-oriented layer antara database ddengan object-oriented programming languages tanpa harus menulis SQL queries langsung
-
-
-
-Referensi:
-https://www.doprax.com/tutorial/django-tutorial-for-beginners-part-6/#:~:text=What%20is%20Django%20ORM,that%20you%20would%20with%20SQL.
-https://djangostars.com/blog/why-we-use-django-framework/#:~:text=Django%20is%20a%20fast%20and,otherwise%20incur%20additional%20costs%20later.
