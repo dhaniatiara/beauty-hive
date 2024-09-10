@@ -1,12 +1,15 @@
 1. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+
 Jawab:
 Pertama, saya membuat direktori baru dan repositori baru di github saya. Setelah itu saya menghubungkan direktori lokal tersebut dengan repositori saya. Kemudian, saya setup Django nya dengan mengikuti Tutorial 0 mulai dari membuat environment dan menyipakan dependencies terlebih dahulu,  kemudian memodivikasi beberapa files seperti settings.py dan membuat git ignore. Setelah itu, saya lanjut membuat aplikasi Django, membuat routing, dan persiapan lainnya yang dijelaskan di Tutorial 1. 
 
-Setelah melakukan hal hal tersebut, saya lanjut dengan membuat model pada aplikasi main dengan nama Product yang di dalamnya ada name, price, description. Name dengan char field, price dengan integer field, description dengan text field, dan size dengan text field.
+Setelah melakukan hal hal tersebut, saya lanjut dengan membuat model pada aplikasi main dengan nama Product yang di dalamnya ada atribut name, price, description. Name dengan char field, price dengan integer field, description dengan text field, dan size dengan text field.
 
 Setelah itu, saya lanjut membuat fungsi di views.py yang sudah saya sesuaikan dengan website saya. Saya memutuskan untuk membuat e-commerce yang menjual makeup, oleh karena itu, di views.py saya membuat variabel 'product' dengan nama produk, kemudian 'price' dengan harga produk yang ditampilkan,  'desc' dengan dengan informasi barang yang saya jual dan saya juga menambahkan 'size' yang merupakan informasi ukuran produk yang saya tampilkan di web. 
 
 Setelah itu saya memodifikasi main.html saya dengan design yang sebelumnya sudah saya buat di Figma. Saya menaruh judul, subjudul, image, dan box yang berisi deskripsi produk. Deskripsi produknya menampilkan data di views.py dan saya juga menampilkan button 'Buy' yang belum berfungsi. 
+
+Setelah saya memodifikasi main.html saya, saya melakukan deployment ini dengan PWS dengan mengikuti perintah yang ada di Tutorial 0. Setelah saya berhasil deploy, web saya akhirnya bisa di akses di internet dengan link http://dhania-tiaraputri-beautyhivestore.pbp.cs.ui.ac.id/
 
 2. Buatlah bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara urls.py, views.py, models.py, dan berkas html.
 

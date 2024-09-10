@@ -4,6 +4,7 @@ class Product(models.Model):
     name = models.CharField(max_length=255)
     price = models.IntegerField()
     desciption = models.TextField()
+    shade = models.TextField()
     size = models.TextField()
 
     @property
