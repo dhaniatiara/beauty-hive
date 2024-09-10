@@ -1,4 +1,4 @@
-## 1. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+# 1. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
 
 Jawab:
 Pertama, saya membuat direktori baru dan repositori baru di github saya dengan nama Beauty HIve karena tema dari aplikasi saya adalah e-commerce yang menjual makeup. Setelah itu saya menghubungkan direktori lokal tersebut dengan repositori saya dengan cara `git branch -M main` kemudian `git remote add origin https://github.com/dhaniatiara/beauty-hive.git` 
@@ -20,10 +20,15 @@ Setelah saya memodifikasi main.html saya, saya melakukan push ke PWS dengan meng
 Jawab:
 ![Bagan](<Screenshot 2024-09-09 at 10.11.53 PM.png>)
 a. Pertama, ada request dari client yang mengirimkan HTTP request ke server Django
+
 b. Server Django akan menerima request dan mencocokkan URL yang diminta dengan pola yang ada di file urls.py. urls.py bertanggung jawab untuk mengatur rute URL yang terakit dengan aplikasi main. 
+
 c. views.py akan memproses request dan akan melakukan beberapa tindakan seperti mengambil data dari database melalui models.py, memproses data. Setelah tindakan tersebut selesai, views.py akan menentukan jenis respon yang akan dikirim ke client, biasanya menggunakan template HTML.
+
 d. models.py merupakan lapisan interaksi dengan database. Saat views.py membutuhkan data, models.py akan digunakan untuk mengambil, menyimpan, atau memperbarui data di database. 
+
 e. HTML : Setelah views.py mendapatkan data yang diperlukan, data tersebut akan dikirim ke berkas HTML yang merupakan template. Berkas html ini akan membentuk tampilan akhir yang akan dilihat oleh user. 
+
 f. Respon: Setelah template terbentuk, Django akan mengirimkan html yang sudah diproses sebagai respon kembali ke client. Client kemudian akan menamoilkan konten ke user.
 
 Kaitan antar semua:
