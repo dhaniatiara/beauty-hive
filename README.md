@@ -1,4 +1,10 @@
-# 1. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+## Beauty Hive App
+
+Nama: Dhania Tiaraputri Herdiani 
+NPM: 2306165881 
+Kelas: PBP B
+
+### 1. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
 
 Jawab:
 Pertama, saya membuat direktori baru dan repositori baru di github saya dengan nama Beauty HIve karena tema dari aplikasi saya adalah e-commerce yang menjual makeup. Setelah itu saya menghubungkan direktori lokal tersebut dengan repositori saya dengan cara `git branch -M main` kemudian `git remote add origin https://github.com/dhaniatiara/beauty-hive.git` 
@@ -15,7 +21,7 @@ Setelah itu saya memodifikasi main.html saya dengan design yang sebelumnya sudah
 
 Setelah saya memodifikasi main.html saya, saya melakukan push ke PWS dengan mengikuti perintah yang ada di Tutorial 0 yaitu `git push pws main:master` Setelah saya berhasil push akhir dari website saya, web saya akhirnya bisa di akses di internet dengan link `http://dhania-tiaraputri-beautyhivestore.pbp.cs.ui.ac.id/`
 
-## 2. Buatlah bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara urls.py, views.py, models.py, dan berkas html.
+### 2. Buatlah bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara urls.py, views.py, models.py, dan berkas html.
 
 Jawab:
 ![Bagan](<Screenshot 2024-09-09 at 10.11.53 PM.png>)
@@ -37,7 +43,7 @@ Kaitan antar semua:
 - models.py: Berinteraksi dengan database untuk mengelola data.
 - Berkas HTML: Menampilkan data yang diterima dari views.py dalam format yang user-friendly.
 
-## 3. Jelaskan fungsi git dalam pengembangan perangkat lunak!
+### 3. Jelaskan fungsi git dalam pengembangan perangkat lunak!
 
 Jawab:
 Git merupakan tool yang digunakan untuk manajemen source code. Git digunakan untuk track perubahan dari sebuah source code, sehingga, adanya git membuat berbagai developer dapat bekerja sama dalam non-linear development melalui ribuan branch paralel.
@@ -49,12 +55,12 @@ Fungsi dari git antara lain adalah:
 - Komunikasi dan kolaborasi.
 
 
-## 4. Menurut Anda, dari semua framework yang ada, mengapa framework Django dijadikan permulaan pembelajaran pengembangan perangkat lunak?
+### 4. Menurut Anda, dari semua framework yang ada, mengapa framework Django dijadikan permulaan pembelajaran pengembangan perangkat lunak?
 
 Jawab:
 Django merupakan salah satu framework yang terkenal untuk pengembangan perangkat lunak. Django menggunakan bahasa Python. Menurut saya, framework Django digunakan untuk permulaan pelajaran ini karena Django menawarkan simplisitas, flesibilitas, reliability, dan scalability. Yang membedakan Django  dengan framework lainnya adalah Django memiliki syntax yang simple, memiliki web sever nya sendiri,  secure, cocok dengan segala proyek platform, memiliki ORM (Object Relational Mapper), library HTTP middleware support, dan unit test python framework.
 
-## 5. Mengapa model pada Django disebut sebagai ORM?
+### 5. Mengapa model pada Django disebut sebagai ORM?
 
 Jawab:
 ORM merupakan singkatan dari Object-relational mapper. ORM membuat kita dapat berinteraksi dengan database seperti saat kita berinteraksi dengan SQL. Model yang kita buat di Django dapat kita modify, delete, menambah, dan query objects. ORM akan digunakan untuk berinteraksi dengan database dan sebagai jembatan antara database dan kode yang kita bikin. ORM membuat sebuah object-oriented layer antara database ddengan object-oriented programming languages tanpa harus menulis SQL queries langsung.
