@@ -13,7 +13,7 @@ Pertama, saya membuat direktori baru dan repositori baru di github saya dengan n
 
 Kemudian, saya setup Django nya dengan mengikuti Tutorial 0 mulai dari menjalankan virtual environment dan menyiapkan dependencies terlebih dahulu, kemudian memodivikasi beberapa files seperti `settings.py`. Setelah itu saya membuat `.gitignore`. Setelah itu, saya lanjut membuat aplikasi Django, membuat routing, dan persiapan lainnya yang dijelaskan di Tutorial 1. 
 
-Setelah itu, saya lanjut ke PWS (Pacil Web Service) untuk membuat project baru. Lalu saya memodifikasi lagi `setting.py` dengan menambahkan URL deployment PWS saya yaitu `dhania-tiaraputri-beautyhivestore.pbp.cs.ui.ac.id` dan lanjut menjalani langkah langkah deployment PWS seperti di Tutorial.
+Setelah itu, saya lanjut ke PWS (Pacil Web Service) untuk membuat project baru. Lalu saya memodifikasi lagi `setting.py` dengan menambahkan URL deployment PWS saya yaitu `dhania-tiaraputri-beautyhiveshop.pbp.cs.ui.ac.id` dan lanjut menjalani langkah langkah deployment PWS seperti di Tutorial.
 
 Setelah melakukan hal hal tersebut, saya lanjut ke repo saya dan membuat model pada aplikasi main dengan nama Product yang di dalamnya ada atribut `name` dengan tipe data `CharField`, `description` dengan tipe data `TextField`, `price` dengan tipe data `IntergerField`, `shade` dengan tipe data `TextField`, dan size dengan tipe data `TextField`.
 
@@ -21,7 +21,7 @@ Setelah itu, saya lanjut membuat fungsi di `views.py` yang sudah saya sesuaikan 
 
 Setelah itu saya memodifikasi main.html saya dengan design yang sebelumnya sudah saya buat di Figma. Saya menaruh judul, subjudul, image, dan box yang berisi deskripsi produk. Deskripsi produknya menampilkan data di views.py dan saya juga menampilkan button 'Buy' yang belum berfungsi. 
 
-Setelah saya memodifikasi main.html saya, saya melakukan push ke PWS dengan mengikuti perintah yang ada di Tutorial 0 yaitu `git push pws main:master` Setelah saya berhasil push akhir dari website saya, web saya akhirnya bisa di akses di internet dengan link `http://dhania-tiaraputri-beautyhivestore.pbp.cs.ui.ac.id/`
+Setelah saya memodifikasi main.html saya, saya melakukan push ke PWS dengan mengikuti perintah yang ada di Tutorial 0 yaitu `git push pws main:master` Setelah saya berhasil push akhir dari website saya, web saya akhirnya bisa di akses di internet dengan link `http://dhania-tiaraputri-beautyhiveshop.pbp.cs.ui.ac.id/`
 
 ### 2. Buatlah bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara urls.py, views.py, models.py, dan berkas html.
 
