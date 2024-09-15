@@ -1,0 +1,134 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Beauty Hive{% endblock title %}</title>
+    <style>
+        body, html { 
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            position: relative; 
+            font-family: Helvetica, sans-serif;
+            background: #FFFFFF; 
+        }
+        h1 { 
+            font-family: Helvetica, sans-serif;
+            font-weight: bold;
+            color: black;
+            text-align: center;
+            margin-top: 30px;
+            margin-bottom: 5px;
+            position: relative; 
+            z-index: 2;
+        }
+        h4, h3, h5, p {
+            font-family: 'Courier New', monospace;
+            color: black;
+            text-align: left;
+            position: relative; 
+            z-index: 2;
+        }
+        h4 {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        h3 {
+            margin-top: 35px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        h5 {
+            margin: 5px 0;
+            margin-top: 30px;
+            font-weight: normal;
+            text-align: center;
+        }
+        .product-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            padding: 20px;
+        }
+        .desc-box {
+            width: 300px; /* Adjust size as needed */
+            margin: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 0; /* Remove padding to make room for image and text separately */
+            background: #F1F0EE;
+            text-align: left;
+            overflow: hidden; /* Ensures content fits nicely within the box */
+        }
+
+        .image-box {
+            width: 100%;
+            height: 150px; /* Adjust to fit the top half of the desc-box */
+            background: url('https://s3-alpha-sig.figma.com/img/acf7/0592/657d47a0365ae9d63fdccd497793459e?Expires=1726444800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=bZNNiQpU8R2GibYFT2OKdRprsuPLT2mo2DmPELjjF8WRBYqwSL~Qs3Sg~8DYyF1Cv-04Su07UHrBa~VeX9T9Yv9LQhlywEzOljkwmT1~NGz11ZJLVYljLd~o10LNBsz6dQK5KMUoYwihNFbZjDvLx3F4swVkOWIMcxG-f2qCWWrSxpmHLhh06tnCWJ1hHuRybFJumeEcfOpPOL2OpHApK16s~GN1eHH6jUN4PsXh7Q8nQY4gwVfJAj~X0P5dAdVdoGxtEcgf32t-3-QHmNTVbRxwm-HZyFWpvIVoY4UJK7wyp4Pnfz5DcX~3XZvOwpMRwQ9evI70nj9ljIbJ3~dvVA__') lightgray 50% / cover no-repeat;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+        .product-title {
+            width: 90%;
+            text-align: left;
+            font-weight: bold;
+            font-size: 22px;
+            margin-top: 50px;
+            margin-bottom: 20px;
+            margin-left: 30px;
+        }
+        .product-details {
+            text-align: left;
+            width: 90%;
+            margin-bottom: 20px; 
+            
+        }
+        .product-detail {
+            margin-bottom: 25px; 
+            margin-left: 30px;
+        }
+        button {
+            margin-top: 20px; 
+            padding: 10px 20px;
+            background-color: black;
+            color: white;
+            border: none;
+            border-radius: 20px; 
+            cursor: pointer;
+            font-size: 16px; 
+            margin-left: 25px;
+            margin-bottom: 40px;
+            align-self: flex-start;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center; /* Centers the button horizontally */
+            margin-top: 20px ; /* Adds some space above and below the button */
+            margin-bottom: -40px;
+            position: relative; 
+            
+        }
+
+        .center-button {
+            padding: 10px 20px;
+            background-color: black;
+            color: white;
+            border: none;
+            border-radius: 20px; 
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+    
+    </style>
+</head>
+<body>
+    {% block content %}
+    {% endblock content %}
+</body>
+</html>

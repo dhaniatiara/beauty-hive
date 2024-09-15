@@ -1,143 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Beauty Hive</title>
-    <style>
-        body, html { 
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            width: 100%;
-            position: relative; 
-            font-family: Helvetica, sans-serif;
-            background: #FFFFFF; 
-        }
-        h1 {
-            font-family: Helvetica, sans-serif;
-            font-weight: bold;
-            color: black;
-            text-align: center;
-            margin-top: 40px;
-            margin-bottom: 5px;
-            position: relative; 
-            z-index: 2;
-        }
-        h4 {
-            font-family: 'Courier New', monospace;
-            color: black;
-            text-align: center;
-            margin-top: 10px;
-            margin-bottom: 10px;
-            position: relative; 
-            z-index: 2;
-        }
-        h3 {
-            font-family: 'Courier New', monospace;
-            color: black;
-            text-align: center;
-            margin-top: 35px;
-            margin-bottom: 10px;
-            position: relative; 
-            z-index: 2;
-        }
-        h5 {
-            font-family: 'Courier New', monospace;
-            color: black;
-            text-align: center;
-            margin: 5px 0;
-            position: relative; 
-            z-index: 2;
-            margin-top: 500px;
-            font-weight: normal;
+{% extends 'base.html' %}
 
-        }
-        p { 
-            font-family: 'Courier New', monospace;
-            color: black;
-            text-align: left;
-            margin: 5px 0;
-            position: relative; 
-            z-index: 2;
-        }
-        h1 {
-            font-weight: bold;
-            margin-top: 40px;
-            margin-bottom: 5px;
-        }
-        h3 {
-            margin-top: 35px;
-            margin-bottom: 10px;
-        }
-        .desc-box, .image-box { 
-            position: absolute;
-            top: 150px;
-            width: 479px;
-            height: 400px;
-            border-radius: 57px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            text-align: left;
-        }
-        .desc-box {
-            background: #F1F0EE;
-            right: 180px;
-        }
-        .image-box {
-            background: url('https://s3-alpha-sig.figma.com/img/acf7/0592/657d47a0365ae9d63fdccd497793459e?Expires=1726444800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=bZNNiQpU8R2GibYFT2OKdRprsuPLT2mo2DmPELjjF8WRBYqwSL~Qs3Sg~8DYyF1Cv-04Su07UHrBa~VeX9T9Yv9LQhlywEzOljkwmT1~NGz11ZJLVYljLd~o10LNBsz6dQK5KMUoYwihNFbZjDvLx3F4swVkOWIMcxG-f2qCWWrSxpmHLhh06tnCWJ1hHuRybFJumeEcfOpPOL2OpHApK16s~GN1eHH6jUN4PsXh7Q8nQY4gwVfJAj~X0P5dAdVdoGxtEcgf32t-3-QHmNTVbRxwm-HZyFWpvIVoY4UJK7wyp4Pnfz5DcX~3XZvOwpMRwQ9evI70nj9ljIbJ3~dvVA__') lightgray 50% / cover no-repeat; /* Background image styling */
-            left: 180px;
-            
-        }
-        .product-title {
-            width: 90%;
-            text-align: left;
-            font-weight: bold;
-            font-size: 22px;
-            margin-top: 50px;
-            margin-bottom: 20px;
-        }
-        .product-details {
-            text-align: left;
-            width: 90%;
-            margin-bottom: 20px; 
-        }
-        .product-detail {
-            margin-bottom: 25px; 
-        }
-        button {
-            margin-top: 20px; 
-            padding: 10px 20px;
-            background-color: black;
-            color: white;
-            border: none;
-            border-radius: 20px; 
-            cursor: pointer;
-            font-size: 16px; 
-            margin-left: 22px;
-            margin-bottom: 40px;
-            align-self: flex-start;
-        }
-    </style>
-</head>
-<body>
-    <h1>BEAUTY HIVE</h1>
-    <h4>All Things Beauty</h4>
-    <h3>OUR PRODUCTS</h3>
-    <div class="desc-box">
-        <div class="product-title">{{ name }}</div>
-        <div class="product-details">
-            <p class="product-detail"><strong>Description:</strong> {{ description }}</p>
-            <p class="product-detail"><strong>Shade:</strong> {{ shade }}</p>
-            <p class="product-detail"><strong>Size:</strong> {{ size }}</p>
-            <p class="product-detail"><strong>Price:</strong> {{ price }}</p>
-        </div>
-        <button>Buy</button>
-    </div>
-    <div class="image-box"></div>
-    <h5>Made by {{ namamahasiswa }} -  {{ npm }} - {{ class }} </h5>
-</body>
-</html>
+{% block content %}
+<h5>Made by Dhania Tiaraputri Herdiani - 2306165881 - PBP B </h5>
+<h1>BEAUTY HIVE</h1>
+<h4>All Things Beauty</h4>
+<h3>OUR PRODUCTS</h3>
+
+<!-- Centered container for the Add New Product button -->
+<div class="button-container">
+    <a href="{% url 'main:create_product_entry' %}">
+        <button class="center-button">Add New Product Entry</button>
+    </a>
+</div>
+
+<!-- Check if there are product entries and display them in the desc-box format -->
+{% if not product_entries %}
+<p>Belum ada data produk pada Beauty Hive.</p>
+{% else %}
+<div class="product-container">
+  {% for product_entry in product_entries %}
+  <div class="desc-box">
+      <!-- Image box inside the desc box -->
+      <div class="image-box"></div>
+      <div class="product-title">{{ product_entry.name }}</div>
+      <div class="product-details">
+          <p class="product-detail"><strong>Description:</strong> {{ product_entry.description }}</p>
+          <p class="product-detail"><strong>Shade:</strong> {{ product_entry.shade }}</p>
+          <p class="product-detail"><strong>Size:</strong> {{ product_entry.size }}</p>
+          <p class="product-detail"><strong>Price:</strong> {{ product_entry.price }}</p>
+      </div>
+      <button>Buy</button>
+  </div>
+  {% endfor %}
+</div>
+{% endif %}
+
+<br />
+
+{% endblock content %}
