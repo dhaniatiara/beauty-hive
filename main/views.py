@@ -9,11 +9,9 @@ def show_main(request):
     product_entries = Product.objects.all()
 
     context = {
-        'name' : 'Peptide Lip Tint',
-        'price': '380000',
-        'description': 'A nourishing  and tinted lip product that gives you the perfect gloss on your lips. The fragrance-free formula leaves lips feeling hydrated and visibly plump.',
-        'shade' : 'Ribbon pink',
-        'size' : '10 ml',
+        'namamhs' : 'Dhania Tiaraputri Herdiani',
+        'npm' : '2306165881',
+        'class' : 'PBP B',
         'product_entries': product_entries
     }
 
