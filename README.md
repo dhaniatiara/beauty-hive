@@ -28,7 +28,7 @@ Setelah saya memodifikasi main.html saya, saya melakukan push ke PWS dengan meng
 ### 2. Buatlah bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara urls.py, views.py, models.py, dan berkas html.
 
 Jawab:
-![Bagan](https://s3-alpha-sig.figma.com/img/d77a/1be8/38b3c6aa096db78bf966ad818c505c7e?Expires=1727049600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=hXbJULU9QOIr-EL6xtr5EQYhD6dNmXOQANnOTBROC7k4tVJ-rnF88bTZpSeH0wqUhPCgpmLTMeN0ClEq-u9g02CSyTtYoYLvMzYoIeiz4a2j5G8m1gJh8IOYV-snJbAlP65RI27T4JsI7Jod9Ob8wmyisFaD~fILqjdjOOLTaLAoHz7~mDVixRlPwDx3bl7aatbeI2ChlzE2E0f6GzBQ97Q-VAa9sk~jgG6kiByrrghxcEAI8UzbSrWbclTk8MXwBcTj3ha~8ZgYyGKrRgZc9w~fOVmIrDoZFkyi9-glYu0d34M5x0r6URQKwjgou-bEsDwCTBFX4waDW3O20w0HmQ__)
+![Bagan](https://drive.google.com/uc?export=view&id=1vB-ScwySa6Ldu-i79i8iTL3z9GE3qSF2)
 a. Pertama, ada request dari client yang mengirimkan HTTP request ke server Django
 
 b. Server Django akan menerima request dan mencocokkan URL yang diminta dengan pola yang ada di file urls.py. urls.py bertanggung jawab untuk mengatur rute URL yang terakit dengan aplikasi main. 
@@ -73,16 +73,76 @@ ORM merupakan singkatan dari Object-relational mapper. ORM membuat kita dapat be
 
 ### 1. Jelaskan mengapa kita memerlukan data delivery dalam pengimplementasian sebuah platform?
 
+Jawab: Data delivery penting dalam pengimplementasian platform karena dengan dengan data delivery kita bisa menargetkan, memodelkan, dan optimisasi pengunjung di platform kita ataupun dari platform lainnya di perangkat lain. Dengan kata lain, data delivery berpengaruh besar dalam meningkatkan performa platform kita. Beberapa aspek yang terpengaruh dengan adanya data delivery adalah skalabilitas data yang masuk, keamanan data, user experience, akurasi data, dan membantu kemudahan dalam analisis data. 
+
+
 ### 2. Menurutmu, mana yang lebih baik antara XML dan JSON? Mengapa JSON lebih populer dibandingkan XML?
+
+Jawab: Menurut saya, XML dan JSON memiliki kelebihannya masing masing dan dapat saling dibutuhkan di situasi tertentu. Contohnya adalah, disaat kita ingin menyimpan berbagai tipe data dengan banyak variables, maka sebaiknya gunakan XML. Karena, XML lebih baik dalam mengecek error pada data yang kompleks secara efisien dibandingkan JSON. Kemudian, kita menggunakan JSON untuk APIs, aplikasi mobile, storage data, karena JSON dirancang untuk interchange data dan memnawarkan format yang lebih simple dan pasti. 
+
+Ada beberapa alasan lain dari mengapa JSON cenderung lebih baik dan lebih populer dibandingkan XML adalah:
+- JSON lebih mudah dibaca oleh manusia karena tidak menggunakan tags seperti pada XML. 
+- JSON memiliki file size yang lebih kecil dibandingkan XML
+- JSON memiliki transimisi data yang lebih cepat dibandingkan XML
+- JSON sangat flekksibel sehingga bisa digunakan untuk hampir semua bahasa komputer
+- Kemudahan JSON dalam parsing data
+- Data modeling yang lebih komprehensif karena struktur JSON yang memfasilitasi enkoding dari data hierarchical
+
+Karena hal hal inilah JSON lebih populer untuk dipakai. 
 
 ### 3. Jelaskan fungsi dari method is_valid() pada form Django dan mengapa kita membutuhkan method tersebut?
 
+Jawab: method is_valid() adalah method yang digunakan untuk memvalidasi setiap field di form. Selain itu, method is_valid ini juga dibutuhkan agar kita bisa melihat error yang ada pada form Django kita. Terutama disaat adanya data eksternal yang akan diinput ke platform kita. Apabila tidak ada is_valid maka bisa saja data yang masuk itu tidak aman dan memiliki format yang salah. Selain itu, is_valid juga membantu membuat workflow yang lebih terstruktur.
+
 ### 4. Mengapa kita membutuhkan csrf_token saat membuat form di Django? Apa yang dapat terjadi jika kita tidak menambahkan csrf_token pada form Django? Bagaimana hal tersebut dapat dimanfaatkan oleh penyerang?
+
+Jawab: CSRF token di buat oleh Django setiap kali seorang user sedang mengunjungi website kita. Token pada CSRF mengandung forms atau request yang dikirim oleh user dan kemudian di check oleh server apakah request datang dari user yang terpercaya dan bukan dari sumber yang membahayakan. Jadi, CSRF token penting untuk dibuat saat membuat form di Django, karena dapat menghindari dari serangan siber yang membahayakan. Apabila kita tidak menambahkan csrf_token pada form Django, maka disaat adanya request dari user seperti submisi form, server website tidak akan menjalankan action yang di request oleh user.
+
+Tidak adanya csrf_token sering dimanfaatkan oleh penyerang. Karena bisa saja ada penyerang yang melakukan berbagai request atau tindakan yang seolah-olah tindakan tersebut berasal dari user aslinya, padahal sebenarnya user aslinya tidak melakukan tindakan tersebut. Beberapa tindakan yang bisa dilakukan oleh penyerang mentransfer dana, mengubah detail akun, atau mengubah pengaturan.
 
 ### 5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
 
+Saya memulai dengan mengimplementasi Skeleton sebagai kerangka Views. Disini, saya membuat `base.html` yang berisi css untuk design komponen website saya. Kemudian saya mengubah `settings.py` dan memodifikasi `main.html` saya yang disesuaikan dengan `base.html`. 
+
+Setelah itu saya delete `db.sqlite` saya, memodifikasi file `models.py` dengan menambah `import uuid` kemudian saya migrate models saya yang telah saya buat di tugas sebelumnya.
+
+Setelah berhasil migrate models saya, saya mulai membuat form dengan membuat berkas dinamakan `forms.py` dengan nama model `Product` dan fields nya yang berisi `name`, `price`, `description`, `shade`, `size`. Kemudian saya memodifikasi berkas `views.py` dengan `import django.shortcuts`, `ProductForm`, dan `Product`. Setelah itu saya menambah fungsi baru yaitu `create_product_ entry` dengan form `ProductForm` dan return nya yang sama seperti tutorial. 
+
+Lalu, saya ke `views.py` dan memodifikasi fungsi `show_main` dengan menulis `mood_entries = Product.objects.all()` dan di dalam context menambah `mood_entries: mood_entries`. Langkah ini dilakukan untuk mengambil seluruh objek di `Product` yang tersimpan pada database.
+
+Saya kemudian modifikasi `urls.py` dengan import `create_product_entry`. Lalu menambahkan path URL ke dalam variabel urlpatterns seperti `path('create-product-entry', create_product_entry, name='create_product_entry')`
+
+Lalu saya membuat berkas `create_product_entry.html` pada direktori main/templates dengan isi kode untuk mengisi data produk baru.
+
+Kemudian saya buka `main.html` dan menambahkan kode yang akan menampilkan kumpulan hasil data input di dalam desc-box.
+
+Disini aplikasi saya sudah ada forms untuk menambah product baru dan hasilnya akan ditampilkan di home page. 
+
+Untuk mengembalikan data dalam bentuk `xml`, saya buka views.py untuk import `HTTPResponse` dan `Serializer`. Kemudian saya menambahkan fungsi baru dengan nama `show_xml` yang akan meyimpan hasil query dari seluruh data yang ada pada `Product`.  Dan saya juga menambahkan return function yang berupa HttpResponse yang memiliki serilizer yang berfungsi untuk translate objek model menjadi format xml. Kemudian saya import fungsi `show_xml` pada `urls.py` dan menambahkan path url. 
+
+Untuk mengembalikan data dalam bentuk `JSON`, saya melakukan alur yang sama seperti sebelumnya saat setting xml, namun bedanya disini fungsinya bernama `show_json` dan return type nya `content_type=“application/json”`. Kemudian saya menambahkan imoort pada `urls.py` dan menambahkan path url di url patterns.
+
+Untuk mengembalikan data berdasarkan `ID` dalam bentuk `XML` dan `JSON`, saya memasuki 2 fungsi baru yang menerima parameter `request` dan `ID`  di `views.py`. Isi dari fungsi nya seperti yang ada pada tutorial. Kemudian saya menambah import pada `urls.py` dan menambahkan path url di url patterns.
+
+Sehingga, pada akhirnya ada 5 fungsi baru di views.py yaitu fungsi `create_product_entry`, `show_xml`, `show_json`, `show_xml_by_id`, `show_json_by_id`, dan path url baru di urlpatterns.
+
 ### Screenshot hasil akses URL pada Postman
-![XML](https://s3-alpha-sig.figma.com/img/22e1/7cff/4d6f5bc714ca1e1a199c44469ef47769?Expires=1727049600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=FF8UNMy9iqzcp233qbC3GQltIAOkeMVhjFwWJd1s5Qd66K-9paiDrL~8b2DpwoSaSlqWKdeF-qo~H6Wf32yLGPk~2dfcpIxIcpxH2vdgd8xMHeOCTrGonaOTNPYLG9eGnfvbxWNgtftgt8rm9Ri00ospvHMiAPsxtRrbIrWt1CbzBy50uuuIse-QFM3BQPtzmRQKQAvQfJXKQ-C9z3TKRc35QlGPAtalY7i3lhou0xYJBFo0vPEPwQDOvD-47NN9qbZKeHdN4Wa1YgdWNBz1N1ySvGsGMJ1TnUUks-Jw1XyZ70Ftk943kyqJcZDACdmubrJ8M9mEuRg4kzHVnA2uiA__)
-![JSON](https://s3-alpha-sig.figma.com/img/f86f/f59f/08da73a36ea6dfb04cb97f9e293babaa?Expires=1727049600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=iKTeKUSC~DMQ7XzlRHe~vVjMgTLJk6sM82cBmZb2uetVOS~R6Tj5Abs8-horjTBW9twCYVLkb5YiRHWsibF4YQi09BTcE7NJFjtul6zL5xG8B7YUJedZGbMuziAkttdYJMzs1Xjsl0WSjjdNLuj7W4mUlbKBwbUlQIWt8g6j5x1OhXuWbMdFMJ8QAwF4edhvYkDULGvP5n-Jt2zu7Os0vwN7EyT-9ChQDMu3OluLD6YSvl4Nce3Da1LpiiRIr3eEkkCCiAJayHDMSFFlNM5sKkjmUyXWnYdfY88FyUAaluubbWd6p8Nojm9DsEgJfZ7aH6E5yzDoqwcmpq0ToQzizw__)
-![XML_ID](https://s3-alpha-sig.figma.com/img/c29d/9548/0ec0d0d0c141d374695d41b913a57675?Expires=1727049600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=h9RQ7565joZ~lzembMHs0PbXN0sqIYypq1I3C~vnpIIDnObAGAzqZoF50U1zr2JIQ-23cN3WcB0zNfhpL65lIHMLoLqzbgO4La~cY0Qnvyvu8cWr7qwTuSvNy9KImwKk2C~yaA-N~Rf2MgzvbtZut3IZsHFNbzZrIYnAxDFCz~FT8IH~OskTY9xte7WsUKMY-0UR2SAgsjtpjxxUE6Lyr8Bo59EJA5KLYe~8nkqD3rVsl3iWter86-KjZpB7rSqHwnfC0DSFa8an4eDgoCqESFWQqJ4WQRgglBsgUrIeuQ8ZFgDWQPNbDxW0RZYvt1NA5jCoKysVxWkqHjNBn2G~aw__)
-![JSON_ID](https://s3-alpha-sig.figma.com/img/1802/80dc/66579dd65ff9b0d6c78512475cc3b07b?Expires=1727049600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=OAdQxeuWvjm6qYm1wjBFlI5RlN2FtbUSzwaV41ewG43TuxGnJTFl24SQe3LjId8kvXrjTHXZtOuMZKUNCqrRkvTzXtBP7tjMoe8vxJyKQxrPiNrOoHD-NRjnW5UkPy14GI6FOcl6P7NscAcbem2AHaHemK8t1Uq2KRIKbzyYNC-7oC0L5-GiVjFju8X19YvAPh~jyPypPKqhaYJDv4jbYV5Dm5MzlFiXJKok6q~fuGH77~EMuQDlUA-uM8M--QAn5f0wCH3gASAY0LIP2OAlXdE1ULvLcbSuqT7c1XRjQmrOIFWRZjb7VFw91zVUc~fTIlLWsL9ro7gATzxzZahRVw__)
+
+XML:
+
+![XML](https://drive.google.com/uc?export=view&id=11dMrsU0U-ORlXDoRCM89jwleQyuJEbp2)
+
+
+JSON:
+
+![JSON](https://drive.google.com/uc?export=view&id=1pUNiEkU8W3hOo9E8WPMnFjgAR07IZsp3)
+
+
+XML ID:
+
+![XML_ID](https://drive.google.com/uc?export=view&id=1QeOYSwnmIr732N2L583WqVAYjd8fGSEu)
+
+
+JSON ID:
+
+![JSON_ID](https://drive.google.com/uc?export=view&id=1StSehrnB9a2M2uKHlI-uG7P5Bf78S8eU)

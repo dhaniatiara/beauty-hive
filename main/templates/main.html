@@ -6,21 +6,19 @@
 <h4>All Things Beauty</h4>
 <h3>OUR PRODUCTS</h3>
 
-<!-- Centered container for the Add New Product button -->
+<!-- Add New Product button -->
 <div class="button-container">
     <a href="{% url 'main:create_product_entry' %}">
         <button class="center-button">Add New Product Entry</button>
     </a>
 </div>
 
-<!-- Check if there are product entries and display them in the desc-box format -->
 {% if not product_entries %}
 <p>Belum ada data produk pada Beauty Hive.</p>
 {% else %}
 <div class="product-container">
   {% for product_entry in product_entries %}
   <div class="desc-box">
-      <!-- Image box inside the desc box -->
       <div class="image-box"></div>
       <div class="product-title">{{ product_entry.name }}</div>
       <div class="product-details">
