@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-!1#ei(sp(jt@ey5a1&k)a(+2kzvi1=@o+95)3x7fz&&rcz0s34'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "dhania-tiaraputri-beautyhiveshop.pbp.cs.ui.ac.id"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "dhania-tiaraputri-beautyhive.pbp.cs.ui.ac.id"]
 
 
 # Application definition
@@ -123,4 +123,4 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CSRF_TRUSTED_ORIGINS = ["http://localhost","http://127.0.0.1","http://dhania-tiaraputri-beautyhiveshop.pbp.cs.ui.ac.id", "https://dhania-tiaraputri-beautyhiveshop.pbp.cs.ui.ac.id"]
+CSRF_TRUSTED_ORIGINS = ["http://localhost","http://127.0.0.1","http://dhania-tiaraputri-beautyhive.pbp.cs.ui.ac.id", "https://dhania-tiaraputri-beautyhive.pbp.cs.ui.ac.id"]
