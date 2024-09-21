@@ -1,4 +1,4 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
 
 {% block content %}
 <h1>Add New Product Entry</h1>
@@ -12,6 +12,10 @@
                 <td></td>
                 <td>
                     <input type="submit" value="Add Product Entry" class="submit-button"/>
+                    <!-- Back to Main button -->
+                    <a href="{% url 'main:show_main' %}" class="submit-button-link">
+                        <button type="button" class="submit-button">Back to Main</button>
+                    </a>
                 </td>
             </tr>
         </table>

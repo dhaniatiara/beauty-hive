@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -24,7 +25,8 @@ SECRET_KEY = 'django-insecure-!1#ei(sp(jt@ey5a1&k)a(+2kzvi1=@o+95)3x7fz&&rcz0s34
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # ubah ke true dari false
-DEBUG = True 
+PRODUCTION = os.getenv("PRODUCTION", False)
+DEBUG = not PRODUCTION
 
 ALLOWED_HOSTS = ["localhost", "127.0.0.1", "dhania-tiaraputri-beautyhive.pbp.cs.ui.ac.id"]
 

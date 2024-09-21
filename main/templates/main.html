@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h5>Made by {{ namamhs }} - {{ npm }} - {{ class }} </h5>
+<h5>Made by {{ name }} - {{ npm }} - {{ class }} </h5>
 <h1>BEAUTY HIVE</h1>
 <h4>All Things Beauty</h4>
 <h3>OUR PRODUCTS</h3>
@@ -13,8 +13,18 @@
     </a>
 </div>
 
+<div class="button-container">
+<a href="{% url 'main:logout' %}">
+    <button class="back-button">Logout</button>
+  </a>
+</div>
+
+
+<h5>Sesi terakhir login: {{ last_login }}</h5>
+
 {% if not product_entries %}
-<p>Belum ada data produk pada Beauty Hive.</p>
+<h3>Belum ada data produk pada Beauty Hive.</h3>
+
 {% else %}
 <div class="product-container">
   {% for product_entry in product_entries %}
@@ -34,5 +44,6 @@
 {% endif %}
 
 <br />
+
 
 {% endblock content %}
