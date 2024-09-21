@@ -20,7 +20,7 @@ def show_main(request):
 
     context = {
         'name': request.user.username,
-        # 'namamhs' : 'Dhania Tiaraputri Herdiani',
+        'namamhs' : 'Dhania Tiaraputri Herdiani',
         'npm' : '2306165881',
         'class' : 'PBP B',
         'product_entries': product_entries,
