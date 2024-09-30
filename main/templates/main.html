@@ -1,50 +1,31 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h5>Made by {{ namamhs }} - {{ npm }} - {{ class }} </h5>
-<h1>BEAUTY HIVE</h1>
-<h4>All Things Beauty</h4>
-<h3>Welcome, {{ name }}</h3>
 
+<div class="bg-white min-h-screen">
+    {% include 'navbar.html' %}
+    <h5 class="text-center text-black mt-8">{{ namamhs }} - {{ npm }} - {{ class }}</h5>
+    <h1 class="text-4xl font-bold text-center mt-20">BEAUTY HIVE</h1>
+    <h4 class="text-2xl text-center mt-4">All Things Beauty</h4>
 
-<!-- Add New Product button -->
-<div class="button-container">
-    <a href="{% url 'main:create_product_entry' %}">
-        <button class="button">Add New Product Entry</button>
-    </a>
+    <!-- Add New Product button -->
+    <div class="flex justify-center mt-4">
+        <a href="{% url 'main:create_product_entry' %}">
+            <button class="button bg-black text-white rounded-full px-6 py-3 mt-4 hover:bg-pink-600 transition-all">Add New Product Entry</button>
+        </a>
+    </div>
+
+    <h5 class="text-center mt-4 text-gray-600">Sesi terakhir login: {{ last_login }}</h5>
+
+    {% if not product_entries %}
+    <h3 class="text-center mt-10">Belum ada data produk pada Beauty Hive.</h3>
+    {% else %}
+    <div class="product-container flex flex-wrap justify-center gap-6 p-6">
+      {% for product_entry in product_entries %}
+        {% include 'card_product.html' with product_entry=product_entry %}
+      {% endfor %}
+    </div>
+    {% endif %}
 </div>
-
-<div class="button-container">
-<a href="{% url 'main:logout' %}">
-    <button class="back-button">Logout</button>
-  </a>
-</div>
-
-
-<h5>Sesi terakhir login: {{ last_login }}</h5>
-
-{% if not product_entries %}
-<h3>Belum ada data produk pada Beauty Hive.</h3>
-
-{% else %}
-<div class="product-container">
-  {% for product_entry in product_entries %}
-  <div class="desc-box">
-      <div class="image-box"></div>
-      <div class="product-title">{{ product_entry.name }}</div>
-      <div class="product-details">
-          <p class="product-detail"><strong>Description:</strong> {{ product_entry.description }}</p>
-          <p class="product-detail"><strong>Shade:</strong> {{ product_entry.shade }}</p>
-          <p class="product-detail"><strong>Size:</strong> {{ product_entry.size }}</p>
-          <p class="product-detail"><strong>Price:</strong> {{ product_entry.price }}</p>
-      </div>
-      <button>Buy</button>
-  </div>
-  {% endfor %}
-</div>
-{% endif %}
-
-<br />
-
 
 {% endblock content %}

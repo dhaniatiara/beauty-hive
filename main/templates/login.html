@@ -1,40 +1,53 @@
 {% extends 'base.html' %}
+{% load static %} 
 
 {% block meta %}
 <title>Login</title>
 {% endblock meta %}
 
 {% block content %}
-<div class="form-container">
-    <h1>Login</h1>
+<div class="flex justify-between items-center min-h-screen bg-gray-100">
+    <div class="hidden lg:block w-1/2 h-full">
+        <img src="{% static 'images/login-photo.png' %}" alt="Login Image" class="w-full h-full object-cover">
+    </div>
 
-    <form method="POST" action="">
-        {% csrf_token %}
-        <table class="form-table">
-            {{ form.as_table }}
-            <tr>
-                <td></td>
-                <td>
-                    <input class="submit-button" type="submit" value="Login" />
-                </td>
-            </tr>
-        </table>
-    </form>
+    <div class="w-full lg:w-1/2 bg-white shadow-lg rounded-2xl p-12 max-w-lg mx-16 lg:mx-24">
+        <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">Login</h1>
+        <p class="text-center text-gray-600 mb-6">Welcome back! Please login to your account.</p>
 
-    {% if messages %}
-    <ul>
-        {% for message in messages %}
-        <li>{{ message }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
+        <!-- Login Form -->
+        <form method="POST" action="" class="space-y-4">
+            {% csrf_token %}
+            <!-- Username -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Username</label>
+                {{ form.username }}
+            </div>
 
-    <p>Don't have an account yet? <a href="{% url 'main:register' %}">Register Now</a></p>
-</div>
+            <!-- Password -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Password</label>
+                {{ form.password }}
+            </div>
 
-<div class="button-container">
-    <a href="{% url 'main:register' %}">
-        <button class="submit-button">Register</button>
-    </a>
+            <!-- Button -->
+            <div class="flex justify-center">
+                <input class="submit-button bg-black hover:bg-gray-800 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105" type="submit" value="Login" />
+            </div>
+        </form>
+
+        {% if messages %}
+        <ul class="mt-4 text-red-500">
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        <p class="text-center text-gray-600 mt-6">
+            Don't have an account yet? 
+            <a href="{% url 'main:register' %}" class="text-indigo-600 hover:text-indigo-800">Register Now</a>
+        </p>
+    </div>
 </div>
 {% endblock content %}

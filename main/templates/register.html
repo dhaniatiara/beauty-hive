@@ -5,33 +5,33 @@
 {% endblock meta %}
 
 {% block content %}
-<div class="form-container">
-  <h1>Register</h1>
+<div class="flex justify-center items-center min-h-screen bg-gray-100">
+    <div class="bg-white shadow-lg rounded-2xl p-8 max-w-md w-full">
+        <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">Register</h1>
 
-  <form method="POST">
-    {% csrf_token %}
-    <table class="form-table">
-      {{ form.as_table }}
-      <tr>
-        <td></td>
-        <td><input class="submit-button" type="submit" name="submit" value="Daftar" /></td>
-      </tr>
-    </table>
-  </form>
+        <!-- Registration Form -->
+        <form method="POST" class="space-y-4">
+            {% csrf_token %}
+            {{ form.as_p }}
 
-  {% if messages %}
-  <ul>
-    {% for message in messages %}
-    <li>{{ message }}</li>
-    {% endfor %}
-  </ul>
-  {% endif %}
+            <div class="flex justify-center">
+                <input class="bg-black hover:bg-gray-800 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105" type="submit" name="submit" value="Register" />
+            </div>
+        </form>
+
+        {% if messages %}
+        <ul class="mt-4 text-red-500">
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        <!-- Back to Login Link -->
+        <p class="text-center text-gray-600 mt-6">
+            Already have an account? 
+            <a href="{% url 'main:login' %}" class="text-indigo-600 hover:text-indigo-800">Back to Login</a>
+        </p>
+    </div>
 </div>
-
-<div class="button-container">
-    <a href="{% url 'main:login' %}">
-        <button class="submit-button">Back to Login</button>
-    </a>
-</div>
-
 {% endblock content %}

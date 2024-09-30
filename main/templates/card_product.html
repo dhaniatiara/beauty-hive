@@ -1,0 +1,20 @@
+<div class="desc-box bg-gray-100 shadow-md rounded-lg overflow-hidden w-80">
+    <div class="image-box bg-cover bg-center h-40" style="background-image: url('{{ product_entry.image_url|default:"https://www.rhodeskin.com/cdn/shop/files/feature-ribbon_1800x.jpg?v=1712794882" }}')"></div>
+    <div class="product-title text-lg font-bold p-4">{{ product_entry.name }}</div>
+    <div class="product-details px-4 pb-4">
+        <p class="product-detail mb-2"><strong>Description:</strong> {{ product_entry.description }}</p>
+        <p class="product-detail mb-2"><strong>Shade:</strong> {{ product_entry.shade }}</p>
+        <p class="product-detail mb-2"><strong>Size:</strong> {{ product_entry.size }}</p>
+        <p class="product-detail mb-2"><strong>Price:</strong> {{ product_entry.price }}</p>
+    </div>
+
+    <!-- Edit and Delete buttons -->
+    <div class="flex justify-between px-4 pb-4">
+        <a href="{% url 'main:edit_product' product_entry.pk %}">
+            <button class="bg-black text-white rounded-full px-4 py-2 hover:bg-pink-600 transition-all">Edit</button>
+        </a>
+        <a href="{% url 'main:delete_product' product_entry.pk %}">
+            <button class="bg-red-600 text-white rounded-full px-4 py-2 hover:bg-red-700 transition-all">Delete</button>
+        </a>
+    </div>
+</div>
