@@ -3,7 +3,8 @@
 {% block content %}
 
 <div class="bg-white min-h-screen">
-    <h1 class="text-4xl font-bold text-center mt-8">Create Product Entry</h1>
+    {% include 'navbar.html' %}
+    <h1 class="text-4xl font-bold text-center mt-32">Create Product Entry</h1>
 
     <form method="POST" class="max-w-xl mx-auto mt-10 bg-gray-100 p-8 rounded-lg shadow-md">
         {% csrf_token %}

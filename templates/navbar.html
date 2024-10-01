@@ -1,14 +1,16 @@
+{%load static%}
 <nav class="fixed top-4 left-1/2 transform -translate-x-1/2 w-[95%] max-w-7xl z-50 bg-white shadow-lg rounded-2xl">
     <div class="px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center h-20">
         <div class="flex items-center">
-          <h1 class="text-lg font-bold text-black">Beauty Hive</h1>
+          <!-- Replace the text with an image -->
+          <img src="{% static 'images/frame5.png' %}" alt="Beauty Hive Logo" class="h-20">
         </div>
         <div class="hidden md:flex space-x-8 items-center">
-            <a href="#" class="text-sm text-black hover:text-gray-700">Home</a>
-            <a href="#" class="text-sm text-black hover:text-gray-700">Products</a>
-            <a href="#" class="text-sm text-black hover:text-gray-700">Categories</a>
-            <a href="#" class="text-sm text-black hover:text-gray-700">Cart</a>
+            <a href="{% url 'main:show_main' %}" class="text-sm text-black hover:text-gray-700">Home</a>
+            <a href="{% url 'main:show_main' %}" class="text-sm text-black hover:text-gray-700">Products</a>
+            <a href="{% url 'main:show_main' %}" class="text-sm text-black hover:text-gray-700">Categories</a>
+            <a href="{% url 'main:show_main' %}" class="text-sm text-black hover:text-gray-700">Cart</a>
           
           {% if user.is_authenticated %}
             <span class="text-sm text-black">Welcome, {{ user.username }}</span>
