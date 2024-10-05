@@ -4,34 +4,185 @@
 
 <div class="bg-white min-h-screen">
     {% include 'navbar.html' %}
+    
     <div class="flex justify-center mt-32"> 
         <img src="{% static 'images/frame10.png' %}" alt="Main Image" class="w-full max-w-7xl">
     </div>
+    
     <h5 class="text-center text-black mt-8">Made by {{ namamhs }} - {{ npm }} - {{ class }}</h5>
     <h5 class="text-center mt-4 text-gray-600">Sesi terakhir login: {{ last_login }}</h5>
-    <!-- Add New Product button -->
-    <div class="flex justify-center mt-4">
+
+    <!-- Add New Product buttons -->
+    <div class="flex justify-center mt-4 space-x-4">
+        <!-- Normal form submission button -->
         <a href="{% url 'main:create_product_entry' %}">
             <button class="button bg-black text-white rounded-full px-6 py-3 mt-4 transition-all hover:bg-[#D97A8A]">
                 Add New Product Entry
             </button>
         </a>
+
+        <!-- AJAX form submission button -->
+        <button onclick="showModal()" class="button bg-black text-white rounded-full px-6 py-3 mt-4 transition-all hover:bg-[#D97A8A]">
+            Add Product via AJAX
+        </button>
     </div>
 
-
-
-    {% if not product_entries %}
-    <div class="flex flex-col items-center mt-10">
-        <img src="{% static 'images/sedih-banget.png' %}" alt="No Products" class="w-32 h-32 mb-4"/>
-        <h3 class="text-center">Belum ada data produk pada Beauty Hive.</h3>
+    <div id="product_entry_cards" class="product-container flex flex-wrap justify-center gap-6 p-6">
+        {% for product_entry in product_entries %}
+            {% include 'card_product.html' with product_entry=product_entry %}
+        {% endfor %}
     </div>
-    {% else %}
-    <div class="product-container flex flex-wrap justify-center gap-6 p-6">
-      {% for product_entry in product_entries %}
-        {% include 'card_product.html' with product_entry=product_entry %}
-      {% endfor %}
+
+    <!-- AJAX Modal Form -->
+    <div id="crudModal" tabindex="-1" aria-hidden="true" class="hidden fixed inset-0 z-50 w-full flex items-center justify-center bg-gray-800 bg-opacity-50 overflow-x-hidden overflow-y-auto transition-opacity duration-300 ease-out">
+        <div id="crudModalContent" class="relative bg-white rounded-lg shadow-lg w-5/6 sm:w-3/4 md:w-1/2 lg:w-1/3 mx-4 sm:mx-0 transform scale-95 opacity-0 transition-transform transition-opacity duration-300 ease-out">
+            <!-- Modal header -->
+            <div class="flex items-center justify-between p-4 border-b rounded-t">
+                <h3 class="text-xl font-semibold text-gray-900">Add New Product Entry</h3>
+                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center" id="closeModalBtn">
+                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 1 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="px-6 py-4 space-y-6">
+                <form id="productForm">
+                    <div class="mb-4">
+                        <label for="name" class="block text-sm font-medium text-gray-700">Product Name</label>
+                        <input type="text" id="name" name="name" class="mt-1 block w-full border border-gray-300 rounded-md p-2 hover:border-indigo-700" placeholder="Enter product name" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
+                        <textarea id="description" name="description" rows="3" class="mt-1 block w-full resize-none border border-gray-300 rounded-md p-2 hover:border-indigo-700" placeholder="Enter product description" required></textarea>
+                    </div>
+                    <div class="mb-4">
+                        <label for="price" class="block text-sm font-medium text-gray-700">Price</label>
+                        <input type="number" id="price" name="price" min="1" class="mt-1 block w-full border border-gray-300 rounded-md p-2 hover:border-indigo-700" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="shade" class="block text-sm font-medium text-gray-700">Shade</label>
+                        <input type="text" id="shade" name="shade" class="mt-1 block w-full border border-gray-300 rounded-md p-2 hover:border-indigo-700" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="size" class="block text-sm font-medium text-gray-700">Size</label>
+                        <input type="text" id="size" name="size" class="mt-1 block w-full border border-gray-300 rounded-md p-2 hover:border-indigo-700" required>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="flex justify-end space-x-2 p-6 border-t border-gray-200 rounded-b">
+                <button type="button" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-lg" id="cancelButton">Cancel</button>
+                <button type="submit" id="submitProductEntry" form="productForm" class="bg-indigo-700 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg">Save</button>
+            </div>
+        </div>
     </div>
-    {% endif %}
+
+    <script>
+        // Function to get product entries via AJAX
+        async function getProductEntries() {
+            const response = await fetch("{% url 'main:show_json' %}");
+            const products = await response.json();
+            const productContainer = document.getElementById("product_entry_cards");
+
+            // Clear the container
+            productContainer.innerHTML = "";
+
+            if (products.length === 0) {
+                productContainer.innerHTML = `
+                    <div class="flex flex-col items-center mt-10">
+                        <img src="{% static 'images/sedih-banget.png' %}" alt="No Products" class="w-32 h-32 mb-4"/>
+                        <h3 class="text-center">Belum ada data produk pada Beauty Hive.</h3>
+                    </div>
+                `;
+            } else {
+                products.forEach(product => {
+                    const productHTML = `
+                        <div class="desc-box bg-gray-100 shadow-md rounded-lg overflow-hidden w-80 transition-transform transform hover:-translate-y-2 hover:shadow-xl">
+                            <div class="image-box bg-cover bg-center h-40" style="background-image: url('{% static 'images/card-photo.png' %}')"></div>
+                            <div class="product-title text-lg font-bold p-4">${product.fields.name}</div>
+                            <div class="product-details px-4 pb-4">
+                                <p class="product-detail mb-2"><strong>Description:</strong> ${product.fields.description}</p>
+                                <p class="product-detail mb-2"><strong>Price:</strong> ${product.fields.price}</p>
+                                <p class="product-detail mb-2"><strong>Shade:</strong> ${product.fields.shade}</p>
+                                <p class="product-detail mb-2"><strong>Size:</strong> ${product.fields.size}</p>
+                            </div>
+
+                            <!-- Edit and Delete buttons -->
+                            <div class="flex justify-between px-4 pb-4">
+                                <a href="/edit-product/${product.pk}">
+                                    <button class="bg-black text-white rounded-full px-4 py-2 hover:bg-[#D97A8A] transition-all">Edit</button>
+                                </a>
+                                <a href="/delete/${product.pk}">
+                                    <button class="bg-red-600 text-white rounded-full px-4 py-2 hover:bg-red-700 transition-all">Delete</button>
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                    productContainer.insertAdjacentHTML('beforeend', productHTML);
+                });
+            }
+        }
+
+        // Function to add product entry via AJAX
+        function addProductEntry() {
+            const form = document.getElementById("productForm");
+            const formData = new FormData(form);
+
+            fetch("{% url 'main:add_product_entry_ajax' %}", {
+                method: "POST",
+                body: formData,
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}',
+                },
+            })
+            .then(response => {
+                if (response.ok) {
+                    getProductEntries();  // Refresh the product list after adding a new product
+                    form.reset();  // Reset the form after successful submission
+                    hideModal();   // Close the modal
+                } else {
+                    console.error('Error adding product:', response.statusText);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
+        // Function untuk show modal
+        function showModal() {
+            const modal = document.getElementById('crudModal');
+            const modalContent = document.getElementById('crudModalContent');
+            modal.classList.remove('hidden'); 
+            setTimeout(() => {
+                modalContent.classList.remove('opacity-0', 'scale-95');
+                modalContent.classList.add('opacity-100', 'scale-100');
+            }, 50);
+        }
+
+        // Function untuk hide modal
+        function hideModal() {
+            const modal = document.getElementById('crudModal');
+            const modalContent = document.getElementById('crudModalContent');
+            modalContent.classList.remove('opacity-100', 'scale-100');
+            modalContent.classList.add('opacity-0', 'scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 150);
+        }
+
+        // Event listeners
+        document.getElementById("cancelButton").addEventListener("click", hideModal);
+        document.getElementById("closeModalBtn").addEventListener("click", hideModal);
+        document.getElementById("submitProductEntry").addEventListener("click", (e) => {
+            e.preventDefault();
+            addProductEntry();
+        });
+
+        document.addEventListener("DOMContentLoaded", getProductEntries);
+    </script>
 </div>
 
 {% endblock content %}
