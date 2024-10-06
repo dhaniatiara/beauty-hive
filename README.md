@@ -289,3 +289,130 @@ Sedangkan, CSS Grid Layout adalah sistem tata letak berbasis grid dua dimensi de
 - Lalu saya memodifikasi file `login.html`, `register.html`, `create_product_entry` menjadi styling tailwind. Untuk `login.html` saya menampilkan static image bernama login-photo.png yang akan ditampilkan sebelah login entry.
 - Saya juga memb uat file `card_mood.html` yang akan menampilkan card baru untuk setiap product entry baru. Dan di dalam nya ada button untuk edit product dan delete product.
 - Setelah menyelesaikan segala berkas html di template, saya akhirnya memodifikasi `main.html` agar segala berkas html lainnya dapat terintegrasi dengan baik. 
+
+## Tugas 6
+
+### 1. Jelaskan manfaat dari penggunaan JavaScript dalam pengembangan aplikasi web!
+
+Jawab: Javascript merupakan scripting language yang memperbolehkan kita untuk membuat konten, mengontrol multimedia, animasi foto, dan lain lain secara dinamis. 
+
+Beberapa manfaat dari JavaScript dalam pengembangan aplikasi web adalah:
+- JavaScript memiliki kemampuan untuk membuat request HTTP yang asinkronus (AJAX) sehingga memungkinkan bagi aplikasi web untuk feth (menangkap) atau send (mengirim) data di background tanpe memerlukan harus refresh satu halaman. kan interaktivitas aplikasi bagi pengguna
+- User Interface yang Bagus. JavaScript memiliki beberapa framework seperti React, Vue, Angular dan lain - lain. Fraemwork ini membuat aplikasi web menjadi lebih dinamis dan menarik.
+- JavaScript sudah sering digunakan pada browser web yang sering kita pakai oleh karena itu bahasa ini sering digunakan sebagai bahasa pengembahangan fitur karena bisa di akses pada berbagi platform
+- JavaScript memiliki fitur DOM (Document object Model) yang mana digunakan untuk membuat perubahan yang real-time dan juga perubahan yang terjadi berdasarkan aksi pengguna. 
+- Full Stack Development. JavaScript bisa digunakan untuk back-end dan front-ent sehingga memudahkan process development dan deployment
+  
+
+Secara keseluruhan, JavaScript telah menjadi bagian yang penting dalam pengembangan aplikasi web di internet karena JavaScript membantu kompleksitas yang lebih tinggi ke dalam aplikasi mereka. Contohnya seperti pada search engine, e-commerce, dan sosial media.
+
+### 2. Jelaskan fungsi dari penggunaan await ketika kita menggunakan fetch()! Apa yang akan terjadi jika kita tidak menggunakan await?
+
+Dengan adanya await pada fetch(), kita bisa menulis kode asinkronus saat ingin mengantur responses. Kita bisa inisiasi HTTP request dan menunggu respon dapat blocking thread utama. Ini biasanya sangat berguna saat ingin fetching data dari API atau melakukan operasi jaringan lainnya. 
+
+Apabila tidak ada await, response yang dikirimkan dari fetch() akan balik lagi. Program akan terus berjalan namun tidak akan menyelesaikan tugas yang telah kita rancang pada kode. 
+
+### 3. Mengapa kita perlu menggunakan decorator csrf_exempt pada view yang akan digunakan untuk AJAX POST?
+ 
+csrj_exempt digunakan untuk mematikan perlindungan Cross-Site Request Forgery (CSRF). CSRJ_exempt akan membuat Django tidak mengecek keberadaan csrf_token pada POST request yang dikirimkan ke fungsi add_mood_entry_ajax. Biasanya csrf_exempt untuk request POST digunakan saat: view kita memproses data dari servis eksternal yang tidak memiliki akses ke token CSRF, sehingga POST bisa request tanpa avalidasi CSRF.
+
+### 4. Pada tutorial PBP minggu ini, pembersihan data input pengguna dilakukan di belakang (backend) juga. Mengapa hal tersebut tidak dilakukan di frontend saja?
+
+Jawab: Pembersihan data input harus tetap dilakukan di backend untuk kepentingan keamanan data. Pengguna bisa menonaktifkan JavaScript dan bisa mengubah atau melewati validasi yang dilakukan di frontend. Oleh karena itu, perlu ada pembersihan di backend (server side) agar data yang diterima tidak mengandung serangan seperti XSS. 
+
+### 5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)!
+
+- Pertama untuk menyobah kode cards data product saya agar dapat mendukung AJAX GET, saya menambahkan dua import `from django.views.decorators.csrf import csrf_exempt` dan 
+`from django.views.decorators.http import require_POSTpada` pada `views.py` dan juga menambahkan fungsi baru dengan nama `add_product_entry_ajax` yang menerima parameter `request` seperti pada tutorial namun isinya adalah name, product, price, shade, size. Kemudian new_produk yang berisi Product(name=name, dst sampai user=user). Isi dari fungsi product entry ini sudah saya sesuaikan dengan models saya. 
+- Setelah menyelesaikan fungsi tersebut, saya menambahkan routing untuk fungsi `add_product_entry_ajax` dan juga menambhakn path url `create-ajax` dan `add_product_entry_ajax` di dalam urlpatterns. 
+- Setelah itu, saya mengatur menampilkan data product entry dengan fetch API dengan cara menghapus `product_entries = Product.objects.filter(user=request.user)` dan `'product_entries': product_entries,`. Kemudian saya mengubah bari s pertama view untuk `show_json` dan `show_xml` seperti `data = Product.objects.filter(user=request.user)`
+- Setelah itu, saya mulai memodifikasi main.html saya. Saya memodifikasi cara pengambilan data produk yang sebelumnya dilakukan secara langsung melalui template menjadi menggunakan AJAX GET. Data produk akan diambil secara asinkron dari server, dan ditampilkan di halaman tanpa melakukan refresh atau reload halaman. Saya menggunakan fungsi getProductEntries() yang diimplementasikan di dalam JavaScript. Fungsi ini melakukan permintaan AJAX GET ke URL yang ditentukan ({% url 'main:show_json' %}) untuk mengambil data produk dalam format JSON.
+Setelah data produk diterima, saya membersihkan area tampilan produk (productContainer.innerHTML = "") lalu menampilkan produk-produk tersebut secara dinamis di halaman dengan membuat elemen HTML untuk setiap produk.
+Jika tidak ada produk, akan ditampilkan pesan "Belum ada data produk pada Beauty Hive" beserta gambar. Berikut kode yang ditambahkan
+```
+async function getProductEntries() {
+    const response = await fetch("{% url 'main:show_json' %}");
+    const products = await response.json();
+    const productContainer = document.getElementById("product_entry_cards");
+
+    productContainer.innerHTML = "";  // Clear product container
+
+    if (products.length === 0) {
+        productContainer.innerHTML = `
+            <div class="flex flex-col items-center mt-10">
+                <img src="{% static 'images/sedih-banget.png' %}" alt="No Products" class="w-32 h-32 mb-4"/>
+                <h3 class="text-center">Belum ada data produk pada Beauty Hive.</h3>
+            </div>
+        `;
+    } else {
+        products.forEach(product => {
+            const productHTML = `
+                <div class="desc-box bg-gray-100 shadow-md rounded-lg overflow-hidden w-80 transition-transform transform hover:-translate-y-2 hover:shadow-xl">
+                    <div class="image-box bg-cover bg-center h-40" style="background-image: url('{% static 'images/card-photo.png' %}')"></div>
+                    <div class="product-title text-lg font-bold p-4">${product.fields.name}</div>
+                    <div class="product-details px-4 pb-4">
+                        <p class="product-detail mb-2"><strong>Description:</strong> ${product.fields.description}</p>
+                        <p class="product-detail mb-2"><strong>Price:</strong> ${product.fields.price}</p>
+                        <p class="product-detail mb-2"><strong>Shade:</strong> ${product.fields.shade}</p>
+                        <p class="product-detail mb-2"><strong>Size:</strong> ${product.fields.size}</p>
+                    </div>
+                    <div class="flex justify-between px-4 pb-4">
+                        <a href="/edit-product/${product.pk}">
+                            <button class="bg-black text-white rounded-full px-4 py-2 hover:bg-[#D97A8A] transition-all">Edit</button>
+                        </a>
+                        <a href="/delete/${product.pk}">
+                            <button class="bg-red-600 text-white rounded-full px-4 py-2 hover:bg-red-700 transition-all">Delete</button>
+                        </a>
+                    </div>
+                </div>
+            `;
+            productContainer.insertAdjacentHTML('beforeend', productHTML);
+        });
+    }
+}
+```
+Card product ditampilkan di halaman setelah melakukan permintaan AJAX GET, dengan kartu produk yang menampilkan informasi name, description, price, shade, dan tombol edit serta hapus.
+
+- Selanjutnya, Saya menambahkan tombol untuk membuka modal yang memicu fungsi `showModal()` saat diklik. Tombol ini tidak memuat ulang halaman, tetapi hanya memunculkan modal form di layar. Setelah form diisi dan tombol "Save" diklik, fungsi `addProductEntry()` digunakan untuk mengirimkan data form melalui AJAX POST ke server dengan URL `({% url 'main:add_product_entry_ajax' %}).`
+Setelah produk berhasil ditambahkan ke database, modal secara otomatis ditutup 
+`(hideModal())`, form di-reset `(form.reset())`, dan produk yang baru ditambahkan langsung ditampilkan di halaman dengan cara memanggil ulang `getProductEntries().`
+Berikut potongan kode yang saya tambahkan
+```
+function addProductEntry() {
+    const form = document.getElementById("productForm");
+    const formData = new FormData(form);
+
+    fetch("{% url 'main:add_product_entry_ajax' %}", {
+        method: "POST",
+        body: formData,
+        headers: {
+            'X-CSRFToken': '{{ csrf_token }}',
+        },
+    })
+    .then(response => {
+        if (response.ok) {
+            getProductEntries();  // Refresh daftar produk
+            form.reset();         // Reset form setelah sukses
+            hideModal();          // Tutup modal setelah submit
+        } else {
+            console.error('Error adding product:', response.statusText);
+        }
+    })
+    .catch(error => console.error('Error:', error));
+}
+```
+- Lalu, saya ke `views.py` dan menggunakan `strip_tags()` untuk membersihkan data input dari tag HTML untuk menghindari serangan XSS.
+- Untuk efresh halaman secara asinkron, saya mengimplementasikan fungsi refresh halaman secara asinkron setelah produk ditambahkan, menggunakan fungsi AJAX GET `getProductEntries()` tanpa reload halaman. Berikut kode yang saya tambahkan
+```
+.then(response => {
+    if (response.ok) {
+        getProductEntries();  // Refresh daftar produk
+        form.reset();         // Reset form setelah submit
+        hideModal();          // Tutup modal
+    } else {
+        console.error('Error adding product:', response.statusText);
+    }
+})
+```
+
+
